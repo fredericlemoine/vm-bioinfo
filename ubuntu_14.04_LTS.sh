@@ -1,6 +1,6 @@
 sudo adduser root staff
 
-sudo mkdir /opt/local/bin/
+sudo mkdir -p /opt/local/bin/
 sudo sh -c "echo 'PATH=\$PATH:/opt/local/bin' > /etc/bash.bashrc"
 
 sudo mkdir /opt/Tools
