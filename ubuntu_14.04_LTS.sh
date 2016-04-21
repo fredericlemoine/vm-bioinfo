@@ -1,19 +1,26 @@
 sudo adduser root staff
 
 sudo mkdir -p /opt/local/bin/
-sudo sh -c "echo 'PATH=\$PATH:/opt/local/bin' > /etc/bash.bashrc"
+sudo sh -c "echo 'PATH=\$PATH:/opt/local/bin' >> /etc/bash.bashrc"
 
 sudo mkdir /opt/Tools
 sudo chmod 777 /opt/Tools
 cd /opt/Tools
 
+###
+# SSH, Git, and cmake
+###
 sudo apt-get install openssh-server 
-sudo sh -c "echo 'deb https://cran.univ-paris1.fr/bin/linux/ubuntu trusty/'" >> /etc/apt/sources.list
+sudo apt-get install git
+sudo apt-get install cmake
+
+####
+# Last version of R
+###
+sudo sh -c "echo 'deb https://cran.univ-paris1.fr/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list"
 sudo apt-get update
 sudo apt-get install r-base
 
-sudo apt-get install git
-sudo apt-get install cmake
 
 #####
 # Rstudio Server
