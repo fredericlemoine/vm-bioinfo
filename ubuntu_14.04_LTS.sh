@@ -7,6 +7,8 @@ sudo mkdir /opt/Tools
 sudo chmod 777 /opt/Tools
 cd /opt/Tools
 
+sudo apt-get install whois
+
 ###
 # SSH, Git, and cmake
 ###
@@ -249,3 +251,12 @@ wget https://github.com/tseemann/snippy/archive/v3.0.tar.gz
 tar -xzvf v3.0.tar.gz
 rm v3.0.tar.gz
 sudo ln -s /opt/Tools/snippy-3.0/bin/* /opt/local/bin/
+
+###
+# Create Users
+###
+for i in {1..100}
+do
+    PASS=`mkpasswd tp$i`
+    sudo useradd tp$i --password $PASS --create-home -s /bin/bash
+done
