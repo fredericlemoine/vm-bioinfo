@@ -267,6 +267,21 @@ make
 sudo ln -s /opt/Tools/FLASH-1.2.11/flash /opt/local/bin
 
 ###
+# Picrust
+###
+sudo pip install biom-format
+sudo pip install cogent
+wget https://github.com/picrust/picrust/releases/download/1.0.0/picrust-1.0.0.tar.gz
+tar -xzvf picrust-1.0.0.tar.gz
+wget ftp://ftp.microbio.me/pub/picrust-references/picrust-1.0.0/16S_13_5_precalculated.tab.gz
+wget ftp://ftp.microbio.me/pub/picrust-references/picrust-1.0.0/ko_13_5_precalculated.tab.gz
+mkdir picrust-1.0.0/picrust/data/
+mv 16S_13_5_precalculated.tab.gz picrust-1.0.0/picrust/data/
+mv ko_13_5_precalculated.tab.gz picrust-1.0.0/picrust/data/
+cd picrust-1.0.0/
+sudo python setup.py install
+
+###
 # Create Users
 ###
 for i in {1..100}
