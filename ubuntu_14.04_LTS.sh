@@ -203,6 +203,11 @@ wget "https://sites.google.com/site/anshulkundaje/projects/idr/idrCode.tar.gz?at
 mv idrCode* idrCode.tar.gz
 tar -xzvf idrCode.tar.gz
 rm idrCode.tar.gz
+tar -xzvf FLASH-1.2.11.tar.gz
+cd FLASH-1.2.11
+make
+
+
 
 ###
 # Freebayes
@@ -251,6 +256,15 @@ wget https://github.com/tseemann/snippy/archive/v3.0.tar.gz
 tar -xzvf v3.0.tar.gz
 rm v3.0.tar.gz
 sudo ln -s /opt/Tools/snippy-3.0/bin/* /opt/local/bin/
+
+###
+# Flash
+###
+wget "http://downloads.sourceforge.net/project/flashpage/FLASH-1.2.11.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fflashpage%2Ffiles%2F&ts=1461850687&use_mirror=heanet"
+mv FLASH* FLASH-1.2.11.tar.gz
+cd FLASH-1.2.11
+make
+sudo ln -s /opt/Tools/FLASH-1.2.11/flash /opt/local/bin
 
 ###
 # Create Users
