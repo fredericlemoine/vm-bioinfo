@@ -284,8 +284,10 @@ sudo python setup.py install
 ###
 # Create Users
 ###
+sudo groupadd tp
 for i in {1..100}
 do
     PASS=`mkpasswd tp$i`
     sudo useradd tp$i --password $PASS --create-home -s /bin/bash
+    sudo usermod -a -G tp tp$i
 done
