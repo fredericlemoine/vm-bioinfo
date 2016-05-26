@@ -174,12 +174,14 @@ find ea-utils.1.1.2-537 -type f -executable -exec sh -c "sudo ln -s /opt/Tools/{
 ###
 # Fantompeakqualtool
 ###
-sudo apt-get install libboost-all-dev
+sudo apt-get install libboost-all-dev gawk
 wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantompeakqualtools/ccQualityControl.v.1.1.tar.gz
 tar -xzvf ccQualityControl.v.1.1.tar.gz
 sudo R -e "install.packages('caTools',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
 sudo R -e "install.packages('snow',lib='/usr/local/lib/R/site-library', repo='http://cran.univ-paris1.fr/')"
-
+cd phantompeakqualtools/
+sudo R -e "install.packages('spp_1.10.1.tar.gz',lib='/usr/local/lib/R/site-library')"
+cd ..
 
 ###
 # DEXSeq
