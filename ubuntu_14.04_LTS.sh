@@ -284,6 +284,13 @@ cd picrust-1.0.0/
 sudo python setup.py install
 
 ###
+# Other R packages
+###
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('GOstats',lib='/usr/local/lib/R/site-library')"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Mm.eg.db',lib='/usr/local/lib/R/site-library')"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('limma',lib='/usr/local/lib/R/site-library')"
+
+###
 # Create Users
 ###
 sudo groupadd tp
