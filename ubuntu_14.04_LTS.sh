@@ -8,6 +8,7 @@ sudo chmod 777 /opt/Tools
 cd /opt/Tools
 
 sudo apt-get install whois
+sudo apt-get install vim
 
 ###
 # SSH, Git, and cmake
@@ -23,7 +24,6 @@ sudo sh -c "echo 'deb https://cran.univ-paris1.fr/bin/linux/ubuntu trusty/' >> /
 sudo apt-get update
 sudo apt-get install r-base
 
-
 #####
 # Rstudio Server
 #####
@@ -31,6 +31,42 @@ sudo apt-get install gdebi-core
 wget https://download2.rstudio.org/rstudio-server-0.99.896-amd64.deb
 sudo gdebi rstudio-server-0.99.896-amd64.deb
 rm rstudio-server-0.99.896-amd64.deb
+
+#####
+# shinyserver
+#####
+sudo R -e "install.packages('shiny',lib='/usr/local/lib/R/site-library/',repos='https://cran.rstudio.com/')"
+sudo R -e "install.packages('rmarkdown',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb
+sudo gdebi shiny-server-1.4.2.786-amd64.deb
+rm shiny-server-1.4.2.786-amd64.deb
+sudo start shiny-server
+
+#####
+# Other R packages (for some shiny apps)
+#####
+sudo apt-get install libssl-dev
+sudo R -e "install.packages('Rcpp',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('shinydashboard',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('rjson',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('devtools',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('psych',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('ggplot2',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('vegan',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('dendextend',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('circlize',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('d3heatmap',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('biom',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('scatterD3',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "library(devtools); with_libpaths(new = '/usr/local/lib/R/site-library/', install_github('rNVD3', 'ramnathv'))"
+sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('genefilter',lib='/usr/local/lib/R/site-library')"
+sudo R -e "install.packages('googleVis',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('shinyjs',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('DT',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('RColorBrewer',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('gplots',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('DESeq2',lib='/usr/local/lib/R/site-library')"
+sudo R -e "install.packages('ade4',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
 
 ###
 # Samtools
