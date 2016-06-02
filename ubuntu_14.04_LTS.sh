@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo adduser root staff
 
 sudo mkdir -p /opt/local/bin/
@@ -9,6 +11,15 @@ cd /opt/Tools
 
 sudo apt-get install whois
 sudo apt-get install vim
+
+# Variables for R packages installation
+CRANREPO="'http://cran.univ-paris1.fr/'"
+RLIBPATH="'/usr/local/lib/R/site-library/'"
+
+# Remove unused packages
+sudo apt-get remove libreoffice*
+sudo apt-get remove firefox
+sudo apt-get remove thunderbird
 
 ###
 # SSH, Git, and cmake
@@ -32,41 +43,52 @@ wget https://download2.rstudio.org/rstudio-server-0.99.896-amd64.deb
 sudo gdebi rstudio-server-0.99.896-amd64.deb
 rm rstudio-server-0.99.896-amd64.deb
 
-#####
+####
 # shinyserver
-#####
-sudo R -e "install.packages('shiny',lib='/usr/local/lib/R/site-library/',repos='https://cran.rstudio.com/')"
-sudo R -e "install.packages('rmarkdown',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+####
+sudo R -e "install.packages('shiny',lib=$RLIBPATH,repos='https://cran.rstudio.com/')"
+sudo R -e "install.packages('rmarkdown',lib=$RLIBPATH,repo=$CRANREPO)"
 wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb
 sudo gdebi shiny-server-1.4.2.786-amd64.deb
 rm shiny-server-1.4.2.786-amd64.deb
 sudo start shiny-server
 
-#####
-# Other R packages (for some shiny apps)
-#####
+####
+# Shaman Shiny application
+####
 sudo apt-get install libssl-dev
-sudo R -e "install.packages('Rcpp',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('shinydashboard',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('rjson',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('devtools',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('psych',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('ggplot2',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('vegan',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('dendextend',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('circlize',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('d3heatmap',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('biom',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('scatterD3',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "library(devtools); with_libpaths(new = '/usr/local/lib/R/site-library/', install_github('rNVD3', 'ramnathv'))"
-sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('genefilter',lib='/usr/local/lib/R/site-library')"
-sudo R -e "install.packages('googleVis',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('shinyjs',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('DT',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('RColorBrewer',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('gplots',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('DESeq2',lib='/usr/local/lib/R/site-library')"
-sudo R -e "install.packages('ade4',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('Rcpp',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('shinydashboard',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('rjson',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('devtools',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('psych',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('ggplot2',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('vegan',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('dendextend',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('circlize',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('d3heatmap',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('biom',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('scatterD3',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "library(devtools); with_libpaths(new = $RLIBPATH, install_github('rNVD3', 'ramnathv'))"
+sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('genefilter',lib=$RLIBPATH)"
+sudo R -e "install.packages('googleVis',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('shinyjs',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('DT',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('RColorBrewer',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('gplots',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "source('https://bioconductor.org/biocLite.R'); biocLite('DESeq2',lib=$RLIBPATH)"
+sudo R -e "install.packages('ade4',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo git clone git clone https://github.com/aghozlane/shaman.git /srv/shiny-server/shaman
+pushd /srv/shiny-server/shaman
+sudo R -e "library(devtools); with_libpaths(new =$RLIBPATH, source('libraries_updates.R'))"
+popd
+
+#########
+# Apache
+#########
+sudo apt-get install apache2
+sudo ln -s /etc/apache2/mods-available/userdir.* /etc/apache2/mods-enabled/
+sudo service apache2 restart
 
 ###
 # Samtools
@@ -213,17 +235,17 @@ find ea-utils.1.1.2-537 -type f -executable -exec sh -c "sudo ln -s /opt/Tools/{
 sudo apt-get install libboost-all-dev gawk
 wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantompeakqualtools/ccQualityControl.v.1.1.tar.gz
 tar -xzvf ccQualityControl.v.1.1.tar.gz
-sudo R -e "install.packages('caTools',lib='/usr/local/lib/R/site-library/',repo='http://cran.univ-paris1.fr/')"
-sudo R -e "install.packages('snow',lib='/usr/local/lib/R/site-library', repo='http://cran.univ-paris1.fr/')"
+sudo R -e "install.packages('caTools',lib=$RLIBPATH,repo=$CRANREPO)"
+sudo R -e "install.packages('snow',lib=$RLIBPATH, repo=$CRANREPO)"
 cd phantompeakqualtools/
-sudo R -e "install.packages('spp_1.10.1.tar.gz',lib='/usr/local/lib/R/site-library')"
+sudo R -e "install.packages('spp_1.10.1.tar.gz',lib=$RLIBPATH)"
 cd ..
 
 ###
 # DEXSeq
 ###
 sudo apt-get install libcurl4-gnutls-dev libxml2 libxml2-dev libreadline6-dev
-sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('DEXSeq',lib='/usr/local/lib/R/site-library')"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('DEXSeq',lib=$RLIBPATH)"
 sudo chmod +x /usr/local/lib/R/library/DEXSeq/python_scripts/*
 sudo sh -c "echo 'alias dexseq_count=\"python /usr/local/lib/R/site-library/DEXSeq/python_scripts/dexseq_count.py\"' >> /etc/bash.bashrc"
 sudo sh -c "echo 'alias dexseq_prepare_annotation=\"python /usr/local/lib/R/site-library/DEXSeq/python_scripts/dexseq_prepare_annotation.py\"' >> /etc/bash.bashrc"
@@ -244,7 +266,7 @@ rm idrCode.tar.gz
 tar -xzvf FLASH-1.2.11.tar.gz
 cd FLASH-1.2.11
 make
-
+cd ..
 
 
 ###
@@ -303,6 +325,7 @@ mv FLASH* FLASH-1.2.11.tar.gz
 cd FLASH-1.2.11
 make
 sudo ln -s /opt/Tools/FLASH-1.2.11/flash /opt/local/bin
+cd ..
 
 ###
 # Picrust
@@ -322,9 +345,18 @@ sudo python setup.py install
 ###
 # Other R packages
 ###
-sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('GOstats',lib='/usr/local/lib/R/site-library')"
-sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Mm.eg.db',lib='/usr/local/lib/R/site-library')"
-sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('limma',lib='/usr/local/lib/R/site-library')"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('GOstats',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Mm.eg.db',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('limma',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('AnnotationDbi',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Hs.eg.db',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('pathview',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('gage',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('gageData',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('KEGGgraph',lib=$RLIBPATH)"
+sudo R -e "install.packages('dplyr',lib=$RLIBPATH, repo=$CRANREPO)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('graph',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('DESeq2',lib=$RLIBPATH)"
 
 ###
 # Create Users
