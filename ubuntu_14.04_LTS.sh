@@ -358,6 +358,7 @@ sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('KEGGgraph',li
 sudo R -e "install.packages('dplyr',lib=$RLIBPATH, repo=$CRANREPO)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('graph',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('DESeq2',lib=$RLIBPATH)"
+sudo R -e "install.packages('plotly',lib=$RLIBPATH, repo=$CRANREPO)"
 
 ###
 # Create Users
