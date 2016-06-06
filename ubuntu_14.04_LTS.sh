@@ -347,6 +347,7 @@ sudo python setup.py install
 ###
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('GOstats',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Mm.eg.db',lib=$RLIBPATH)"
+sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Sc.sgd.db',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('limma',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('AnnotationDbi',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('org.Hs.eg.db',lib=$RLIBPATH)"
