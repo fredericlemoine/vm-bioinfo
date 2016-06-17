@@ -343,6 +343,38 @@ cd picrust-1.0.0/
 sudo python setup.py install
 
 ###
+# SPAdes
+###
+wget http://spades.bioinf.spbau.ru/release3.8.1/SPAdes-3.8.1-Linux.tar.gz
+tar -xzvf SPAdes-3.8.1-Linux.tar.gz
+sudo ln -s $PWD/SPAdes-3.8.1-Linux/bin/* /opt/local/bin/
+
+###
+# Quast
+###
+wget "http://downloads.sourceforge.net/project/quast/quast-4.1.tar.gz?r=http%3A%2F%2Fquast.sourceforge.net%2Fquast&ts=1466163291&use_mirror=jaist"
+mv quast-4.1.tar.gz* quast-4.1.tar.gz
+tar -xzvf quast-4.1.tar.gz
+pushd quast-4.1
+python quast.py --test
+popd
+
+###
+# Prodigal
+###
+wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux
+sudo ln -s $PWD/prodigal.linux /opt/local/bin/prodigal
+
+####
+# Commet 
+###
+git clone https://github.com/pierrepeterlongo/commet.git
+pushd commet
+make
+sudo ln -s $PWD/bin/* /opt/local/bin/
+popd
+
+###
 # Other R packages
 ###
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('GOstats',lib=$RLIBPATH)"
