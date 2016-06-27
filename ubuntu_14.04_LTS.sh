@@ -216,6 +216,15 @@ sudo apt-get install python-numpy
 sudo apt-get install python3-numpy
 sudo apt-get install python-matplotlib
 sudo apt-get install python3-matplotlib
+sudo apt-get install python-scipy
+sudo apt-get install python3-scipy
+sudo apt-get install python-biopython
+
+###
+# SRA-toolkit
+###
+wget -q http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.5.7/sratoolkit.2.5.7-ubuntu64.tar.gz -O- | tar xz
+sudo ln -s /opt/Tools/sratoolkit.2.5.7-ubuntu64/bin/* /opt/local/bin/
 
 ###
 # Fastq-mcf
@@ -228,6 +237,21 @@ cd ea-utils.1.1.2-537
 make
 cd ..
 find ea-utils.1.1.2-537 -type f -executable -exec sh -c "sudo ln -s /opt/Tools/{} /opt/local/bin" \;
+
+###
+# Jupyter hub Python notebook
+###
+sudo apt-get install npm libzmq-dev
+sudo apt-get install nodejs-legacy
+sudo apt-get install python3-zmq
+sudo apt-get install python-zmq
+sudo apt-get install python-jsonschema
+sudo apt-get install python3-jsonschema
+sudo npm install -g configurable-http-proxy
+sudo pip3 install jupyterhub
+sudo pip3 install --upgrade notebook
+sudo /usr/bin/python2 -m IPython kernelspec install-self
+sudo jupyterhub --no-ssl
 
 ###
 # Fantompeakqualtool
@@ -345,9 +369,9 @@ sudo python setup.py install
 ###
 # SPAdes
 ###
-wget http://spades.bioinf.spbau.ru/release3.8.1/SPAdes-3.8.1-Linux.tar.gz
-tar -xzvf SPAdes-3.8.1-Linux.tar.gz
-sudo ln -s $PWD/SPAdes-3.8.1-Linux/bin/* /opt/local/bin/
+wget http://spades.bioinf.spbau.ru/release3.7.1/SPAdes-3.7.1-Linux.tar.gz
+tar -xzvf SPAdes-3.7.1-Linux.tar.gz
+sudo ln -s $PWD/SPAdes-3.7.1-Linux/bin/* /opt/local/bin/
 
 ###
 # Quast
@@ -357,6 +381,7 @@ mv quast-4.1.tar.gz* quast-4.1.tar.gz
 tar -xzvf quast-4.1.tar.gz
 pushd quast-4.1
 python quast.py --test
+sudo ln -s *.py /opt/local/bin/
 popd
 
 ###
@@ -372,6 +397,7 @@ git clone https://github.com/pierrepeterlongo/commet.git
 pushd commet
 make
 sudo ln -s $PWD/bin/* /opt/local/bin/
+sudo ln -s $PWD/*.py $PWD/*.R /opt/local/bin/
 popd
 
 ###
@@ -391,6 +417,7 @@ sudo R -e "install.packages('dplyr',lib=$RLIBPATH, repo=$CRANREPO)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('graph',lib=$RLIBPATH)"
 sudo R -e "source('https://bioconductor.org/biocLite.R');biocLite('DESeq2',lib=$RLIBPATH)"
 sudo R -e "install.packages('plotly',lib=$RLIBPATH, repo=$CRANREPO)"
+sudo R -e "library(devtools); with_libpaths(new = $RLIBPATH, install_github('timelyportfolio/d3vennR'))"
 
 ###
 # Create Users
