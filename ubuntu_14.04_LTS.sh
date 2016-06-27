@@ -247,6 +247,10 @@ sudo apt-get install python3-zmq
 sudo apt-get install python-zmq
 sudo apt-get install python-jsonschema
 sudo apt-get install python3-jsonschema
+sudo pip3 install mpld3
+sudo pip install mpld3
+sudo pip3 install jija2
+sudo pip install jinja2
 sudo npm install -g configurable-http-proxy
 sudo pip3 install jupyterhub
 sudo pip3 install --upgrade notebook
